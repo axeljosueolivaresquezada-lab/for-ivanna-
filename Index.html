@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#000">
+<title>Mi Ivanna OS ❤️</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}html,body{width:100%;height:100%;overflow:hidden;background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}button,input{font:inherit}
+:root{--glass:rgba(20,20,25,.46);--line:rgba(255,255,255,.2);--pink:#ff5d8f}
+.wall{position:fixed;inset:0;background:linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.38)),url("fondo.jpg") center/cover no-repeat;transform:scale(1.02)}
+#boot{position:fixed;inset:0;z-index:9999;background:#050505;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:.8s}
+#boot.hide{opacity:0;visibility:hidden}.heartBoot{font-size:76px;animation:beat 1s infinite}.bootTitle{font-size:29px;font-weight:750;margin-top:15px}.bootSub{opacity:.55;margin-top:7px}.loader{width:180px;height:4px;background:#222;border-radius:9px;margin-top:32px;overflow:hidden}.loader:after{content:"";display:block;height:100%;width:0;background:#fff;animation:load 2s forwards}
+@keyframes beat{50%{transform:scale(1.14)}}@keyframes load{to{width:100%}}
+#lock{position:fixed;inset:0;z-index:900;background:linear-gradient(rgba(0,0,0,.13),rgba(0,0,0,.33)),url("fondo.jpg") center/cover no-repeat;transition:.75s cubic-bezier(.77,0,.18,1)}
+#lock.out{transform:translateY(-105%);opacity:0;pointer-events:none}.status{padding:max(16px,env(safe-area-inset-top)) 19px 0;display:flex;justify-content:space-between;font-size:14px;font-weight:650;text-shadow:0 2px 8px #000}
+.lockCenter{text-align:center;margin-top:35px;text-shadow:0 3px 15px #000}.lockIcon{font-size:23px}.date{font-size:17px;margin-top:10px;text-transform:capitalize}.clock{font-size:78px;font-weight:250;letter-spacing:-4px}
+.notice{width:90%;max-width:420px;margin:40px auto;padding:14px;border:1px solid var(--line);border-radius:22px;background:rgba(15,15,18,.38);backdrop-filter:blur(20px)}.noticeTop{display:flex;gap:10px;align-items:center}.noticeBadge{width:37px;height:37px;border-radius:11px;background:linear-gradient(145deg,#ff789f,#d71959);display:grid;place-items:center}.notice small{margin-left:auto;opacity:.6}.notice b{display:block;margin-top:10px}.notice p{font-size:14px;opacity:.85;margin-top:3px}
+.unlock{position:absolute;left:0;right:0;bottom:max(25px,env(safe-area-inset-bottom));text-align:center;font-weight:650;cursor:pointer;animation:float 1.5s infinite}.bar{width:135px;height:5px;background:#fff;border-radius:9px;margin:17px auto 0}@keyframes float{50%{transform:translateY(-6px);opacity:.7}}
+#home{position:fixed;inset:0;z-index:20;padding:max(14px,env(safe-area-inset-top)) 16px max(14px,env(safe-area-inset-bottom));display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:scale(1.06);transition:.6s}
+#home.show{opacity:1;visibility:visible;transform:none}.shade{position:absolute;inset:0;z-index:-1;background:rgba(0,0,0,.23);backdrop-filter:blur(1px)}.homeStatus{display:flex;justify-content:space-between;font-size:13px;font-weight:650;text-shadow:0 2px 8px #000}
+.widget{margin-top:27px;padding:18px;border:1px solid var(--line);border-radius:25px;background:var(--glass);backdrop-filter:blur(20px)}.widget small{opacity:.65;letter-spacing:1px}.widget h1{font-size:27px;margin-top:4px}.widget p{font-size:14px;opacity:.84;margin-top:5px}
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:25px 7px;margin-top:29px}.app{text-align:center;cursor:pointer;position:relative}.icon{width:62px;height:62px;margin:auto;border-radius:19px;display:grid;place-items:center;font-size:29px;border:1px solid var(--line);box-shadow:0 9px 24px rgba(0,0,0,.28);transition:.15s}.app:active .icon{transform:scale(.84)}.name{font-size:11.5px;margin-top:6px;text-shadow:0 2px 7px #000}.redDot{position:absolute;top:-5px;right:12%;background:#f33;color:#fff;border:2px solid #fff;width:22px;height:22px;border-radius:50%;font-size:11px;display:none;place-items:center}.redDot.on{display:grid}
+.c1{background:linear-gradient(145deg,#ffbd45,#ff3e70)}.c2{background:linear-gradient(145deg,#61e692,#11a856)}.c3{background:linear-gradient(145deg,#ff7199,#d71959)}.c4{background:linear-gradient(145deg,#ff4f78,#851942)}.c5{background:linear-gradient(145deg,#ffe36c,#e89b19)}.c6{background:linear-gradient(145deg,#333,#050505)}.c7{background:linear-gradient(145deg,#bbb,#555)}
+.dock{margin-top:auto;padding:11px;border:1px solid var(--line);border-radius:27px;background:rgba(20,20,25,.38);backdrop-filter:blur(22px);display:flex;justify-content:space-around}.dock button{width:55px;height:55px;border:0;border-radius:17px;background:rgba(255,255,255,.16);font-size:27px;color:#fff}
+#screen{position:fixed;inset:0;z-index:1200;background:linear-gradient(rgba(0,0,0,.58),rgba(0,0,0,.78)),url("fondo.jpg") center/cover no-repeat;transform:translateY(105%);transition:.45s cubic-bezier(.77,0,.18,1);overflow:auto;padding:max(18px,env(safe-area-inset-top)) 17px max(28px,env(safe-area-inset-bottom))}
+#screen.open{transform:none}.appHead{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;padding-bottom:16px}.back{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.13);color:#fff;font-size:27px;backdrop-filter:blur(15px)}#screenTitle{font-size:24px}
+.panel{border:1px solid var(--line);border-radius:26px;background:rgba(16,16,20,.5);backdrop-filter:blur(22px);padding:20px;min-height:200px}.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.gallery img,.gallery .videoTile{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px}.videoTile{position:relative;overflow:hidden;background:#111;cursor:pointer}.videoTile video{width:100%;height:100%;object-fit:cover}.videoTile:after{content:"▶";position:absolute;inset:0;display:grid;place-items:center;font-size:36px;text-shadow:0 3px 10px #000;background:rgba(0,0,0,.16)}.sub{opacity:.65;font-size:13px;margin:4px 0 16px}
+#viewer{position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.97);display:none;align-items:center;justify-content:center}#viewer.on{display:flex}#viewer img,#viewer video{max-width:100%;max-height:88dvh;object-fit:contain}.vbtn{position:absolute;border:0;color:#fff;background:rgba(255,255,255,.13);border-radius:50%}.vclose{top:max(18px,env(safe-area-inset-top));right:18px;width:44px;height:44px}.prev,.next{top:50%;width:46px;height:58px;border-radius:16px;font-size:32px}.prev{left:8px}.next{right:8px}.count{position:absolute;top:max(28px,env(safe-area-inset-top));left:50%;transform:translateX(-50%)}
+.chat{display:flex;flex-direction:column;gap:10px}.bubble{align-self:flex-start;max-width:86%;background:rgba(255,255,255,.14);padding:11px 13px;border-radius:17px 17px 17px 4px;animation:pop .3s}.bubble small{display:block;opacity:.5;text-align:right;margin-top:4px}@keyframes pop{from{opacity:0;transform:translateY(8px)}}.continue{width:100%;margin-top:17px;border:0;border-radius:17px;padding:13px;background:#fff;color:#111;font-weight:750}
+.timeline{border-left:2px solid rgba(255,255,255,.25);margin-left:8px;padding-left:19px}.event{position:relative;margin:0 0 24px}.event:before{content:"";position:absolute;width:11px;height:11px;background:#ff7199;border-radius:50%;left:-25px;top:5px}.event b{display:block}.event p{opacity:.75;margin-top:5px;font-size:14px}.counter{text-align:center;padding:18px;margin-bottom:22px;border-radius:20px;background:rgba(255,93,143,.13)}.counter strong{font-size:26px;display:block}
+.musicPlayer{margin-bottom:18px;overflow:hidden;border-radius:20px;background:#080808}.musicPlayer iframe{display:block;width:100%;aspect-ratio:16/9;border:0}.nowPlaying{padding:12px 14px}.nowPlaying small{display:block;opacity:.6;margin-top:3px}.song{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid rgba(255,255,255,.1)}.songIcon{width:47px;height:47px;border-radius:12px;background:linear-gradient(145deg,#ff4f78,#7d1538);display:grid;place-items:center;font-size:21px}.songText{flex:1}.songText small{display:block;opacity:.6;margin-top:2px}.play{border:0;border-radius:50%;width:39px;height:39px;background:#fff;color:#111}
+.note{background:#fff3a5;color:#332d14;border-radius:18px;padding:17px;margin-bottom:12px;box-shadow:0 9px 25px rgba(0,0,0,.16)}.note.locked{background:#292929;color:#fff;border:1px solid var(--line)}
+.secret{text-align:center}.secret input{width:100%;margin:18px 0 10px;padding:14px;border-radius:15px;border:1px solid var(--line);background:rgba(255,255,255,.1);color:#fff;text-align:center;font-size:19px}.primary{width:100%;padding:13px;border:0;border-radius:15px;background:#fff;color:#111;font-weight:750}.error{color:#ff8ba8;margin-top:10px}.secretText{line-height:1.7;text-align:left}.proposal{display:block;font-size:20px;text-align:center;margin:22px 0;color:#ffb3c7}
+.envelope{text-align:center;padding:25px 0}.env{font-size:90px;cursor:pointer;animation:float 1.7s infinite}.letter{display:none;background:#fffaf4;color:#342b2d;padding:24px 20px;border-radius:10px;line-height:1.72;text-align:left}.letter.show{display:block;animation:pop .5s}.letter p{margin-bottom:15px}.signature{text-align:right;font-family:cursive;font-size:20px}
+.flowers{text-align:center;min-height:480px;position:relative;overflow:hidden}.bouquet{font-size:80px;margin-top:60px;animation:bloom 1.3s both}.orchid{font-size:48px}.butterfly{position:absolute;font-size:25px;animation:fly 5s infinite ease-in-out}.b1{left:10%;top:20%;animation-delay:-1s}.b2{right:12%;top:35%;animation-delay:-3s}.b3{left:45%;top:8%;animation-delay:-2s}@keyframes bloom{from{opacity:0;transform:translateY(80px) scale(.5)}}@keyframes fly{50%{transform:translate(35px,-45px) rotate(15deg)}}.flowerQuote{margin:25px auto 0;max-width:320px;line-height:1.6}
+.final{text-align:center;padding:20px 0}.bigHeart{font-size:100px;animation:beat 1s infinite}.lockedHeart{font-size:75px}.hold{margin-top:18px;padding:14px 20px;border:0;border-radius:22px;background:#fff;color:#111;font-weight:750}.finalReveal{display:none;font-size:23px;margin-top:25px}.systemRow{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1)}.muted{opacity:.6}
+#toast{position:fixed;z-index:9000;top:max(20px,env(safe-area-inset-top));left:50%;transform:translate(-50%,-120px);background:rgba(10,10,12,.85);border:1px solid var(--line);backdrop-filter:blur(18px);padding:12px 18px;border-radius:22px;transition:.35s;white-space:nowrap}#toast.on{transform:translate(-50%,0)}
+@media(max-width:380px){.clock{font-size:67px}.icon{width:56px;height:56px}.apps{gap:20px 4px}.widget{margin-top:18px}}
+</style>
+</head>
+<body>
+<div class="wall"></div>
+<div id="boot"><div class="heartBoot">❤️</div><div class="bootTitle">Mi Ivanna OS</div><div class="bootSub">Hecho especialmente para ti</div><div class="loader"></div></div>
+<div id="lock">
+ <div class="status"><span id="miniTime">00:00</span><span>●●● Wi‑Fi 🔋</span></div>
+ <div class="lockCenter"><div class="lockIcon" id="lockIcon">🔒</div><div class="date" id="date"></div><div class="clock" id="clock">00:00</div></div>
+ <div class="notice"><div class="noticeTop"><div class="noticeBadge">❤️</div><span>Mi Ivanna</span><small>ahora</small></div><b>Tienes algo nuevo ❤️</b><p>Axel preparó algo especialmente para ti...</p></div>
+ <div class="unlock" onclick="unlockPhone()">Toca para desbloquear ↑<div class="bar"></div></div>
+</div>
+
+<div id="home">
+ <div class="shade"></div>
+ <div class="homeStatus"><span id="homeTime">00:00</span><span>Mi Ivanna OS ❤️</span><span>Wi‑Fi 🔋</span></div>
+ <div class="widget"><small>SOLO PARA TI</small><h1>Mi Ivanna ❤️</h1><p>Un pequeño lugar donde guardé un pedacito de nosotros.</p></div>
+ <div class="apps">
+  <div class="app" onclick="openPhotos()"><div class="icon c1">📸</div><div class="name">Fotos</div></div>
+  <div class="app" onclick="openMessages()"><div class="icon c2">💬</div><div class="name">Mensajes</div></div>
+  <div class="app" onclick="openUs()"><div class="icon c3">❤️</div><div class="name">Nosotros</div></div>
+  <div class="app" onclick="openMusic()"><div class="icon c4">🎵</div><div class="name">Música</div></div>
+  <div class="app" onclick="openNotes()"><div id="notesDot" class="redDot">1</div><div class="icon c5">📝</div><div class="name">Notas</div></div>
+  <div class="app" onclick="openSecret()"><div class="icon c6">🔐</div><div class="name">Secreto</div></div>
+  <div class="app" onclick="openSystem()"><div class="icon c7">⚙️</div><div class="name">Sistema</div></div>
+ </div>
+ <div class="dock">
+  <button onclick="toast('Llamando a mi persona favorita... ❤️')">📞</button>
+  <button onclick="openLetter()">💌</button>
+  <button onclick="openFlowers()">🌷</button>
+  <button onclick="openHeart()">❤️</button>
+ </div>
+</div>
+
+<div id="screen"><div class="appHead"><button class="back" onclick="closeApp()">‹</button><h2 id="screenTitle"></h2></div><div class="panel" id="content"></div></div>
+<div id="viewer"><button class="vbtn vclose" onclick="closePhoto()">✕</button><div class="count" id="count"></div><button class="vbtn prev" onclick="changePhoto(-1)">‹</button><img id="viewerImg"><video id="viewerVideo" controls playsinline style="display:none"></video><button class="vbtn next" onclick="changePhoto(1)">›</button></div>
+<div id="toast">❤️</div>
+
+<script>
+const $=id=>document.getElementById(id);
+setTimeout(()=>$("boot").classList.add("hide"),2200);
+function updateClock(){const n=new Date(),t=n.toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit",hour12:false});$("clock").textContent=$("miniTime").textContent=$("homeTime").textContent=t;$("date").textContent=n.toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long"})}updateClock();setInterval(updateClock,1000);
+function unlockPhone(){$("lockIcon").textContent="🔓";if(navigator.vibrate)navigator.vibrate(30);setTimeout(()=>{$("lock").classList.add("out");$("home").classList.add("show")},220)}
+function openBase(title,html){$("screenTitle").textContent=title;$("content").innerHTML=html;$("screen").classList.add("open")}
+function closeApp(){$("screen").classList.remove("open")}
+function toast(m){$("toast").textContent=m;$("toast").classList.add("on");setTimeout(()=>$("toast").classList.remove("on"),2200)}
+
+const photos=["foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg","foto5.jpg","foto6.jpg","foto7.jpg","foto8.jpg"];let photoIndex=0;
+function openPhotos(){openBase("Fotos",`<h3>Nuestros recuerdos ❤️</h3><div class="sub">8 fotos y un video guardados en Mi Ivanna OS</div><div class="gallery">${photos.map((p,i)=>`<img src="${p}" alt="Recuerdo ${i+1}" onclick="openPhoto(${i})">`).join("")}<div class="videoTile" onclick="openVideo()"><video src="Video1.mp4" muted preload="metadata"></video></div></div>`)}
+function openPhoto(i){photoIndex=i;$("viewerVideo").pause();$("viewerVideo").style.display="none";$("viewerImg").style.display="block";$("viewerImg").src=photos[i];$("count").textContent=`${i+1} / ${photos.length} fotos`;$("prevBtn")?.style?.setProperty("display","block");$("viewer").classList.add("on")}
+function openVideo(){$("viewerImg").style.display="none";$("viewerVideo").style.display="block";$("viewerVideo").src="Video1.mp4";$("count").textContent="Nuestro video ❤️";$("viewer").classList.add("on");$("viewerVideo").play().catch(()=>{})}
+function closePhoto(){$("viewerVideo").pause();$("viewer").classList.remove("on")}
+function changePhoto(d){photoIndex=(photoIndex+d+photos.length)%photos.length;openPhoto(photoIndex)}
+
+const messages=[
+"Holaaaa amor mío ❤️",
+"Si estás leyendo esto significa que ya lograste entrar a Mi Ivanna OS jajaja.",
+"Quería hacerte algo diferente por nuestros 10 meses.",
+"Algo que pudieras explorar y donde pudiera guardar poquito a poquito nuestra historia.",
+"Porque 10 meses parecen poquito, pero contigo han pasado demasiadas cosas que no quiero olvidar.",
+"Y amor, se encuentra algo escondido dentro de este teléfono 👀❤️",
+"Yo que tú revisaría mis Notas… 📝",
+"Te amo, mi Ivannita ❤️"
+];let msgStep=1;
+function openMessages(){openBase("Axel ❤️",`<div class="chat" id="chat"></div><button class="continue" id="continue" onclick="nextMessage()">Continuar…</button>`);msgStep=1;renderMessages()}
+function renderMessages(){const c=$("chat");c.innerHTML=messages.slice(0,msgStep).map(m=>`<div class="bubble">${m}<small>ahora</small></div>`).join("");if(msgStep>=messages.length){$("continue").style.display="none";$("notesDot").classList.add("on");localStorage.setItem("notesHint","1")}setTimeout(()=>window.scrollTo(0,document.body.scrollHeight),50)}
+function nextMessage(){if(msgStep<messages.length){msgStep++;renderMessages()}}
+
+function togetherText(){const start=new Date(2025,11,2,10,48),now=new Date();let months=(now.getFullYear()-start.getFullYear())*12+(now.getMonth()-start.getMonth());if(now.getDate()<start.getDate())months--;const days=Math.floor((now-start)/86400000);return `${Math.max(0,months)} meses · ${Math.max(0,days)} días`}
+function openUs(){openBase("Nosotros ❤️",`<div class="counter"><span>Tiempo desde que empezó nuestro nosotros</span><strong>${togetherText()} ❤️</strong></div><div class="timeline">
+<div class="event"><b>11 de agosto de 2025 — Nos conocimos 📚</b><p>Nos conocimos un lunes en clase de inglés. Tú me hablabas, pero a mí me daba pena.</p></div>
+<div class="event"><b>8 de octubre de 2025 — El primer mensaje 💬</b><p>Te mandé mensaje por primera vez y empezamos a hablar mucho más.</p></div>
+<div class="event"><b>11 de noviembre de 2025 · 11:04 a. m. — Nuestro primer beso 💋</b><p>Uno de los momentos más bonitos de nuestra historia.</p></div>
+<div class="event"><b>2 de diciembre de 2025 · 10:48 a. m. — Nosotros ❤️</b><p>El momento en que te pedí que fueras mi novia.</p></div>
+<div class="event"><b>14 de febrero — Un paso más 🌹</b><p>Le pedí permiso a tu mamá para salir contigo.</p></div>
+<div class="event"><b>Y nuestra historia continúa… ❤️</b><p>Solemos salir y todo contigo se vuelve más divertido. Todavía nos faltan muchísimas cosas por vivir.</p></div></div>`)}
+
+const songs=[
+["Next to You","Chris Brown ft. Justin Bieber","EEuQU6a90Pc"],
+["Perfect","One Direction","Ho32Oh6b4jc"],
+["Sugar","Maroon 5","09R8_2nJtjg"],
+["Raindance","Dave ft. Tems",""],
+["golden hour","JVKE","PEM0Vs8jf1w"],
+["Transform","Daniel Caesar",""],
+["Nothin' on You","B.o.B ft. Bruno Mars",""],
+["Just the Way You Are","Bruno Mars","LjhCEhWiKXk"],
+["Die Hard","Kendrick Lamar",""],
+["Te agüe forever","Drake",""]
+];
+function openMusic(){openBase("Música 🎵",`<div class="musicPlayer"><iframe id="musicFrame" src="https://www.youtube-nocookie.com/embed/${songs[0][2]}?playsinline=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><div class="nowPlaying"><b id="nowTitle">${songs[0][0]}</b><small id="nowArtist">${songs[0][1]}</small></div></div><h3>Nuestras canciones ❤️</h3><div class="sub">Se reproducen aquí dentro. En algunos videos YouTube puede mostrar anuncios o impedir la reproducción incrustada.</div>${songs.map((s,i)=>`<div class="song"><div class="songIcon">🎵</div><div class="songText"><b>${s[0]}</b><small>${s[1]}</small></div><button class="play" onclick="playSong(${i})">▶</button></div>`).join("")}`)}
+function playSong(i){const s=songs[i];$("nowTitle").textContent=s[0];$("nowArtist").textContent=s[1];if(s[2]){$("musicFrame").src="https://www.youtube-nocookie.com/embed/"+s[2]+"?autoplay=1&playsinline=1&rel=0"}else{$("musicFrame").src="https://www.youtube-nocookie.com/embed?listType=search&list="+encodeURIComponent(s[0]+" "+s[1])+"&autoplay=1&playsinline=1"}}
+
+function openNotes(){$("notesDot").classList.remove("on");openBase("Notas 📝",`${notes.map(n=>`<div class="note">${n}</div>`).join("")}<div class="note locked"><b>🔒 Nota protegida</b><br><br>Si quieres descubrir el secreto deberás colocar un código.<br><br>Las pistas son mi día de cumpleaños, tu día de cumpleaños y la hora que te pedí.<br><br>Y además algo que solo tú sabes es el día que… pues ya sabes, amor mío ❤️</div>`)}
+
+function openSecret(){openBase("Secreto 🔐",`<div class="secret"><div style="font-size:65px">🔐</div><h3>Área protegida</h3><p class="sub">Solo Mi Ivanna debería poder entrar aquí.</p><input id="code" inputmode="numeric" placeholder="Código"><button class="primary" onclick="checkCode()">Desbloquear</button><div class="error" id="err"></div></div>`)}
+function checkCode(){if($("code").value.trim()==="0829104807"){localStorage.setItem("heartUnlocked","1");$("content").innerHTML=`<div class="secretText"><h2 style="text-align:center">Acceso concedido ❤️</h2><p style="margin-top:20px">Sabes que daría mi vida por ti como no te imaginas. Yo espero que siempre sientas cuánto te amo y cuánto deseo estar para ti. De verdad, si algún día quieres contarme tus problemas, amor, estaré ahí para apoyarte y escucharte.</p><p>Si necesitas llorar, llora conmigo. Permíteme abrazarte, permíteme estar para ti. Si algún día crees que el mundo se viene abajo, solo dime: “amor, te necesito”, e iré corriendo a verte. Siempre estaré para ti, amor, siempre.</p><p>Espero que de verdad me creas cuando te digo que te amo y que sientas que eres amada y querida por mí; que estés segura de que encontraste al amor de tu vida, porque yo estoy seguro de que en ti encontré al amor de mi vida.</p><span class="proposal">Llegará el momento en el que inesperadamente yo te diré:<br><br>“¿Me permitirías pasar el resto de tu vida contigo? ¿Quieres casarte conmigo?” ❤️</span><p>Y ese día espero hacerte la mujer más feliz de este mundo.</p><p style="text-align:center"><b>Te amo, mi Ivannita. ❤️</b></p></div>`;toast("❤️ Corazón desbloqueado")}else{$("err").textContent="Ese no es el código, amor ❤️";if(navigator.vibrate)navigator.vibrate([40,40,40])}}
+
+function openLetter(){openBase("Carta 💌",`<div class="envelope"><div class="env" onclick="openEnvelope()">💌</div><p id="envHint">Toca el sobre, mi amor ❤️</p></div><div class="letter" id="letter">
+<p><b>Mi amor:</b></p>
+<p>El día de hoy cumplimos 10 meses y me parece increíble darme cuenta de lo rápido que ha pasado el tiempo, porque, sin darme cuenta, me has hecho tan feliz.</p>
+<p>El día en que supe que yo te gustaba no me lo podía creer. No podía creer que a la mujer de quien yo me había enamorado a primera vista también le gustara yo. Fue uno de los momentos más felices de mi vida.</p>
+<p>Y después llegó nuestro primer beso, aquel martes 11 de noviembre a las 11:04 a. m. Recuerdo los nervios que me daban incluso para tomarte de la mano. Verte todavía me parece irreal, porque a veces simplemente no comprendo cómo puedes ser tan hermosa. Hay momentos en los que no puedo dejar de verte y pensar que quiero cuidarte todos los días de mi vida.</p>
+<p>También recuerdo todo el plan que armé para pedirte que fueras mi novia y lo nervioso que estaba por hacer algo así. Pero también recuerdo lo feliz que fui aquel 2 de diciembre a las 10:48 a. m.</p>
+<p>Ahora, cuando pienso en mis metas y en mi futuro, inevitablemente pienso en ti.</p>
+<p>Te amo, y no te lo digo solamente por decirlo. Te amo tal y como eres, con tus virtudes, tus defectos y cada una de esas pequeñas cosas que te hacen ser tú, porque para mí amarte significa amarte con todo eso.</p>
+<p>Me encanta hacerte feliz y ver esa carita cuando te compro comida o cuando te doy algún detallito. No me imagino pasar el resto de mi vida sin ver esa sonrisa.</p>
+<p>Me encanta lo espontánea que eres y todas las cosas que sueles decirme. Me gusta verte cuando estás concentrada haciendo tus trabajos, cuando tienes sueño y, debo admitirlo, amor, prácticamente en cualquier momento.</p>
+<p>Quiero cumplir tus caprichos, acompañarte a cumplir tus sueños y llevarte a conocer muchos lugares. Quiero verte alcanzar cada una de tus metas y también quiero que estés conmigo cuando yo alcance las mías.</p>
+<p>Quiero que algún día podamos mirar hacia atrás y recordar todo esto que apenas estamos comenzando a vivir.</p>
+<p><b>Te amo, mi Ivannita. ❤️</b></p><div class="signature">Att: Axel Quezada</div></div>`)}
+function openEnvelope(){$("letter").classList.add("show");$("envHint").style.display="none";document.querySelector(".env").style.display="none"}
+
+function openFlowers(){openBase("Flores 🌷",`<div class="flowers"><span class="butterfly b1">🦋</span><span class="butterfly b2">🦋</span><span class="butterfly b3">🦋</span><div class="bouquet">🌹🌹🌹<br><span class="orchid">🌸🌸</span></div><div class="flowerQuote"><h2>Para mi Ivannita 🌹</h2><p style="margin-top:12px">Las flores algún día se marchitan, pero si pudiera elegir, te regalaría una por cada día que quiero seguir a tu lado. ❤️</p></div><button class="primary" style="margin-top:22px" onclick="butterflies()">Toca aquí 🦋</button></div>`)}
+function butterflies(){for(let i=0;i<12;i++){setTimeout(()=>toast(["🦋 Para ti, amor","🦋❤️","Te amo 🦋"][i%3]),i*230)}}
+
+function openHeart(){if(localStorage.getItem("heartUnlocked")!=="1"){openBase("Mi corazón ❤️",`<div class="final"><div class="lockedHeart">🔒❤️</div><h2>Mi corazón está bloqueado</h2><p class="sub" style="margin-top:12px">Parece que primero tienes que descubrir algo...</p></div>`);return}
+openBase("Mi corazón ❤️",`<div class="final"><div class="bigHeart">❤️</div><p class="muted">Propietaria de este corazón</p><h1>Ivanna ❤️</h1><p style="line-height:1.65;margin-top:18px">Desde que llegaste a mi vida, este corazón dejó de ser solamente mío.<br><br>No sé exactamente qué nos espere en el futuro, pero sí sé con quién quiero descubrirlo.<br><br><b>Te amo, mi Ivannita.</b><br>— Axel</p><button class="hold" id="holdBtn">❤️ Mantén presionado mi corazón</button><div class="finalReveal" id="finalReveal">10 meses fueron solamente el comienzo. ❤️</div></div>`);const b=$("holdBtn");let timer;const start=()=>timer=setTimeout(()=>{$("finalReveal").style.display="block";b.textContent="❤️ Para siempre"},1800);const stop=()=>clearTimeout(timer);b.addEventListener("touchstart",start);b.addEventListener("touchend",stop);b.addEventListener("mousedown",start);b.addEventListener("mouseup",stop)}
+
+function openSystem(){openBase("Sistema ⚙️",`<div style="text-align:center;font-size:65px">❤️</div><h2 style="text-align:center;margin-bottom:20px">Mi Ivanna OS</h2><div class="systemRow"><span>Propietaria</span><b>Mi Ivanna ❤️</b></div><div class="systemRow"><span>Desarrollado por</span><b>Axel</b></div><div class="systemRow"><span>Versión</span><b>3.1</b></div><div class="systemRow"><span>Estado</span><b>Enamorado ❤️</b></div><div class="systemRow"><span>Almacenamiento</span><b>Recuerdos ilimitados</b></div>`)}
+if(localStorage.getItem("notesHint")==="1")$("notesDot").classList.add("on");
+</script>
+</body>
+</html>
