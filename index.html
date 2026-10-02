@@ -128,6 +128,15 @@ const songs=[
 function openMusic(){openBase("Música 🎵",`<div class="musicPlayer"><iframe id="musicFrame" src="https://www.youtube-nocookie.com/embed/${songs[0][2]}?playsinline=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><div class="nowPlaying"><b id="nowTitle">${songs[0][0]}</b><small id="nowArtist">${songs[0][1]}</small></div></div><h3>Nuestras canciones ❤️</h3><div class="sub">Se reproducen aquí dentro. En algunos videos YouTube puede mostrar anuncios o impedir la reproducción incrustada.</div>${songs.map((s,i)=>`<div class="song"><div class="songIcon">🎵</div><div class="songText"><b>${s[0]}</b><small>${s[1]}</small></div><button class="play" onclick="playSong(${i})">▶</button></div>`).join("")}`)}
 function playSong(i){const s=songs[i];$("nowTitle").textContent=s[0];$("nowArtist").textContent=s[1];if(s[2]){$("musicFrame").src="https://www.youtube-nocookie.com/embed/"+s[2]+"?autoplay=1&playsinline=1&rel=0"}else{$("musicFrame").src="https://www.youtube-nocookie.com/embed?listType=search&list="+encodeURIComponent(s[0]+" "+s[1])+"&autoplay=1&playsinline=1"}}
 
+const notes=[
+"Amore mío, te amo como no te imaginas ❤️",
+"Mi vida, si tenemos un gato, ¿cómo se llamaría? 🐱",
+"¿Cuánto tiempo tardarías en darte cuenta de que soy Spiderman? 🕷️🕸️",
+"¿Sabes que daría mi vida por ti? ❤️",
+"¿A qué país quieres que viajemos primero? ✈️",
+"¿Sí sabías que las mariposas vuelan, amor mío, o nou? 🦋"
+];
+
 function openNotes(){$("notesDot").classList.remove("on");openBase("Notas 📝",`${notes.map(n=>`<div class="note">${n}</div>`).join("")}<div class="note locked"><b>🔒 Nota protegida</b><br><br>Si quieres descubrir el secreto deberás colocar un código.<br><br>Las pistas son mi día de cumpleaños, tu día de cumpleaños y la hora que te pedí.<br><br>Y además algo que solo tú sabes es el día que… pues ya sabes, amor mío ❤️</div>`)}
 
 function openSecret(){openBase("Secreto 🔐",`<div class="secret"><div style="font-size:65px">🔐</div><h3>Área protegida</h3><p class="sub">Solo Mi Ivanna debería poder entrar aquí.</p><input id="code" inputmode="numeric" placeholder="Código"><button class="primary" onclick="checkCode()">Desbloquear</button><div class="error" id="err"></div></div>`)}
