@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#10071c">
-<title>Ivanna OS</title>
+<meta name="theme-color" content="#000000">
+<title>Mi Ivanna OS ❤️</title>
 
 <style>
 *{
@@ -14,271 +14,273 @@
   -webkit-tap-highlight-color:transparent;
 }
 
-:root{
-  --glass:rgba(255,255,255,.14);
-  --border:rgba(255,255,255,.20);
-  --text:#fff;
-}
-
 html,body{
   width:100%;
   height:100%;
   overflow:hidden;
+  background:#000;
 }
 
 body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  background:#050308;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   color:white;
 }
 
+button,input{
+  font:inherit;
+}
+
 /* =========================
-   FONDO
+   FONDO GENERAL
 ========================= */
 
-.wallpaper{
-  position:absolute;
+.background{
+  position:fixed;
   inset:0;
-  overflow:hidden;
   background:
-    radial-gradient(circle at 75% 15%,#e847bd 0%,transparent 28%),
-    radial-gradient(circle at 15% 35%,#743ee0 0%,transparent 35%),
-    radial-gradient(circle at 70% 80%,#42147e 0%,transparent 35%),
-    linear-gradient(145deg,#160922,#08050f);
-}
-
-.wallpaper::before{
-  content:"";
-  position:absolute;
-  width:400px;
-  height:400px;
-  background:#ff5ca8;
-  filter:blur(130px);
-  opacity:.17;
-  border-radius:50%;
-  top:-200px;
-  right:-150px;
-  animation:moveGlow 9s ease-in-out infinite alternate;
-}
-
-@keyframes moveGlow{
-  to{
-    transform:translate(-80px,150px);
-  }
+    linear-gradient(
+      rgba(0,0,0,.15),
+      rgba(0,0,0,.35)
+    ),
+    url("fondo.jpg") center center / cover no-repeat;
+  transform:scale(1.02);
+  z-index:0;
 }
 
 /* =========================
-   BOOT
+   ARRANQUE
 ========================= */
 
 #boot{
-  position:absolute;
+  position:fixed;
   inset:0;
-  z-index:100;
-  background:#030303;
+  z-index:1000;
+  background:#050505;
 
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
 
-  transition:opacity .8s ease;
+  transition:
+    opacity .8s ease,
+    visibility .8s ease;
 }
 
-.boot-heart{
-  font-size:75px;
-  animation:heartbeat 1.2s infinite;
+#boot.hide{
+  opacity:0;
+  visibility:hidden;
 }
 
-.boot-name{
-  font-size:25px;
+.bootHeart{
+  font-size:78px;
+  animation:heart 1.1s infinite;
+}
+
+.bootTitle{
+  font-size:28px;
   font-weight:700;
   margin-top:18px;
 }
 
-.boot-version{
-  margin-top:7px;
+.bootSub{
   font-size:13px;
-  opacity:.45;
+  opacity:.5;
+  margin-top:7px;
 }
 
-.loading{
-  width:160px;
+.loader{
+  width:180px;
   height:4px;
   background:#242424;
-  border-radius:20px;
+  border-radius:10px;
   overflow:hidden;
   margin-top:35px;
 }
 
-.loading div{
-  width:0%;
+.loaderBar{
   height:100%;
+  width:0;
   background:white;
-  animation:load 2.2s forwards;
+  border-radius:10px;
+  animation:loading 2.1s forwards;
 }
 
-@keyframes load{
+@keyframes loading{
   to{width:100%}
 }
 
-@keyframes heartbeat{
+@keyframes heart{
   0%,100%{transform:scale(1)}
-  50%{transform:scale(1.13)}
+  50%{transform:scale(1.15)}
 }
 
 /* =========================
-   LOCK SCREEN
+   LOCKSCREEN
 ========================= */
 
 #lockscreen{
-  position:absolute;
+  position:fixed;
   inset:0;
-  z-index:50;
+  z-index:500;
 
   display:flex;
   flex-direction:column;
   align-items:center;
 
+  background:
+    linear-gradient(
+      rgba(0,0,0,.18),
+      rgba(0,0,0,.30)
+    ),
+    url("fondo.jpg") center center / cover no-repeat;
+
   transition:
     transform .8s cubic-bezier(.77,0,.18,1),
-    opacity .7s;
+    opacity .7s ease;
 }
 
-#lockscreen.hide{
+#lockscreen.unlocking{
   transform:translateY(-105%);
   opacity:0;
   pointer-events:none;
 }
 
-.lock-status{
+.statusbar{
   width:100%;
   padding:
-    max(17px,env(safe-area-inset-top))
-    22px 0;
+    max(16px,env(safe-area-inset-top))
+    20px 5px;
 
   display:flex;
+  align-items:center;
   justify-content:space-between;
 
   font-size:14px;
-  font-weight:600;
+  font-weight:650;
+
+  text-shadow:0 2px 7px rgba(0,0,0,.7);
 }
 
-.lock-icon{
-  font-size:24px;
+.lockCenter{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
   margin-top:25px;
+  text-shadow:0 3px 14px rgba(0,0,0,.7);
+}
+
+#lockIcon{
+  font-size:24px;
+  margin-bottom:14px;
 }
 
 #date{
-  margin-top:16px;
   font-size:18px;
   font-weight:600;
   text-transform:capitalize;
 }
 
 #clock{
-  font-size:82px;
-  font-weight:200;
-  letter-spacing:-5px;
+  font-size:80px;
   line-height:1;
-  margin-top:5px;
+  font-weight:250;
+  letter-spacing:-4px;
+  margin-top:4px;
 }
 
-/* NOTIFICACIÓN */
+/* NOTIFICACION */
 
 .notification{
   width:90%;
   max-width:410px;
+  margin-top:40px;
+  padding:14px;
 
-  padding:15px;
+  border-radius:23px;
 
-  border-radius:22px;
+  background:rgba(20,20,20,.38);
+  border:1px solid rgba(255,255,255,.28);
 
-  margin-top:45px;
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
 
-  background:rgba(255,255,255,.16);
-
-  border:1px solid rgba(255,255,255,.24);
-
-  backdrop-filter:blur(25px);
-  -webkit-backdrop-filter:blur(25px);
-
-  box-shadow:0 15px 35px rgba(0,0,0,.15);
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
 }
 
-.notification-top{
+.notificationTop{
   display:flex;
   align-items:center;
   gap:10px;
 }
 
-.notification-icon{
-  width:37px;
-  height:37px;
-
+.notificationIcon{
+  width:38px;
+  height:38px;
   border-radius:11px;
-
-  background:linear-gradient(145deg,#ff507b,#d41455);
 
   display:flex;
   align-items:center;
   justify-content:center;
 
+  background:linear-gradient(145deg,#ff608b,#d91b58);
+
   font-size:20px;
 }
 
-.notification-app{
+.notificationName{
   font-size:13px;
   font-weight:700;
 }
 
-.notification-now{
+.now{
   margin-left:auto;
+  opacity:.65;
   font-size:12px;
-  opacity:.6;
 }
 
-.notification-title{
+.notificationTitle{
   font-weight:700;
   margin-top:10px;
 }
 
-.notification-message{
+.notificationText{
   font-size:14px;
-  opacity:.8;
   margin-top:3px;
+  opacity:.88;
 }
 
 /* DESBLOQUEO */
 
-.unlock{
+.unlockArea{
   position:absolute;
-  bottom:max(28px,env(safe-area-inset-bottom));
-
-  text-align:center;
+  bottom:max(25px,env(safe-area-inset-bottom));
   width:100%;
-
+  text-align:center;
   cursor:pointer;
+  text-shadow:0 2px 7px #000;
 }
 
-.unlock-text{
+.unlockText{
   font-size:15px;
-  animation:up 1.7s infinite;
+  font-weight:600;
+  animation:up 1.6s infinite;
 }
 
 @keyframes up{
   50%{
     transform:translateY(-7px);
-    opacity:.55;
+    opacity:.6;
   }
 }
 
-.bar{
+.homeBar{
   width:135px;
   height:5px;
-  background:white;
   border-radius:10px;
+  background:white;
   margin:17px auto 0;
+  box-shadow:0 2px 6px rgba(0,0,0,.4);
 }
 
 /* =========================
@@ -286,74 +288,109 @@ body{
 ========================= */
 
 #home{
-  position:absolute;
+  position:fixed;
   inset:0;
   z-index:10;
 
-  padding:
-    max(15px,env(safe-area-inset-top))
-    18px
-    max(15px,env(safe-area-inset-bottom));
-
   display:flex;
   flex-direction:column;
+
+  padding:
+    max(14px,env(safe-area-inset-top))
+    17px
+    max(14px,env(safe-area-inset-bottom));
+
+  opacity:0;
+  visibility:hidden;
+  transform:scale(1.08);
+
+  transition:
+    opacity .6s ease,
+    transform .7s ease;
 }
 
-.home-status{
+#home.visible{
+  opacity:1;
+  visibility:visible;
+  transform:scale(1);
+}
+
+.homeShade{
+  position:absolute;
+  inset:0;
+  z-index:-1;
+
+  background:rgba(0,0,0,.23);
+
+  backdrop-filter:blur(1.5px);
+  -webkit-backdrop-filter:blur(1.5px);
+}
+
+.homeStatus{
   display:flex;
   justify-content:space-between;
   align-items:center;
 
-  padding:4px 5px;
+  padding:3px 5px;
 
   font-size:14px;
-  font-weight:600;
+  font-weight:650;
+
+  text-shadow:0 2px 8px #000;
 }
 
-.os-name{
-  opacity:.75;
+.osName{
+  font-size:13px;
 }
 
 /* WIDGET */
 
-.widget{
-  margin-top:30px;
+.loveWidget{
+  margin-top:28px;
 
-  padding:21px;
+  padding:19px;
 
-  border-radius:28px;
+  border-radius:27px;
 
-  background:var(--glass);
-  border:1px solid var(--border);
+  background:rgba(20,20,20,.34);
 
-  backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
+  border:1px solid rgba(255,255,255,.24);
+
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+
+  box-shadow:0 15px 35px rgba(0,0,0,.18);
 }
 
-.widget-small{
-  font-size:13px;
-  opacity:.65;
-}
-
-.widget h1{
-  margin-top:3px;
-  font-size:27px;
-}
-
-.widget p{
-  font-size:14px;
+.widgetLabel{
+  font-size:11px;
+  font-weight:700;
   opacity:.7;
-  margin-top:5px;
+  letter-spacing:1.2px;
 }
 
-/* APPS */
+.loveWidget h1{
+  margin-top:5px;
+  font-size:28px;
+}
+
+.loveWidget p{
+  margin-top:5px;
+  font-size:14px;
+  opacity:.85;
+}
+
+/* =========================
+   APPS
+========================= */
 
 .apps{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:25px 10px;
 
-  margin-top:34px;
+  gap:26px 8px;
+
+  margin-top:31px;
 }
 
 .app{
@@ -362,7 +399,7 @@ body{
   user-select:none;
 }
 
-.app-icon{
+.appIcon{
   width:64px;
   height:64px;
 
@@ -374,84 +411,90 @@ body{
   align-items:center;
   justify-content:center;
 
-  font-size:30px;
+  font-size:29px;
 
-  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.24);
 
-  border:1px solid rgba(255,255,255,.2);
+  box-shadow:
+    0 9px 25px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.2);
 
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-
-  box-shadow:0 10px 30px rgba(0,0,0,.15);
-
-  transition:.15s;
+  transition:
+    transform .15s ease,
+    filter .15s ease;
 }
 
-.app:active .app-icon{
-  transform:scale(.85);
+.app:active .appIcon{
+  transform:scale(.83);
+  filter:brightness(.8);
 }
 
-.app span{
-  display:block;
+.appName{
   font-size:12px;
   margin-top:7px;
-  text-shadow:0 2px 5px #000;
+
+  text-shadow:
+    0 2px 4px #000,
+    0 0 8px #000;
 }
 
 .photos{
-  background:linear-gradient(145deg,#ffb13b,#ff476f);
+  background:linear-gradient(145deg,#ffbf4a,#ff416c);
 }
 
 .messages{
-  background:linear-gradient(145deg,#3de08f,#0fa956);
+  background:linear-gradient(145deg,#5ce58c,#11a956);
 }
 
 .us{
-  background:linear-gradient(145deg,#ff658d,#e01c58);
+  background:linear-gradient(145deg,#ff7199,#d71959);
 }
 
 .music{
-  background:linear-gradient(145deg,#ff496c,#9e174a);
+  background:linear-gradient(145deg,#ff4d75,#9d1647);
 }
 
 .memories{
-  background:linear-gradient(145deg,#9465ff,#5434d6);
+  background:linear-gradient(145deg,#a679ff,#5432d2);
 }
 
 .notes{
-  background:linear-gradient(145deg,#ffd75c,#e99b20);
+  background:linear-gradient(145deg,#ffe06a,#e89b19);
 }
 
 .secret{
-  background:linear-gradient(145deg,#313131,#050505);
+  background:linear-gradient(145deg,#333,#050505);
 }
 
-.settings{
-  background:linear-gradient(145deg,#999,#4c4c4c);
+.system{
+  background:linear-gradient(145deg,#b1b1b1,#555);
 }
 
-/* DOCK */
+/* =========================
+   DOCK
+========================= */
 
 .dock{
   margin-top:auto;
 
-  padding:12px;
+  padding:12px 10px;
+
+  border-radius:28px;
 
   display:flex;
   justify-content:space-around;
 
-  border-radius:28px;
+  background:rgba(25,25,25,.35);
 
-  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.23);
 
-  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
 
-  backdrop-filter:blur(25px);
-  -webkit-backdrop-filter:blur(25px);
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
 }
 
-.dock-app{
+.dockIcon{
   width:57px;
   height:57px;
 
@@ -463,77 +506,88 @@ body{
 
   font-size:27px;
 
-  background:rgba(255,255,255,.17);
+  background:rgba(255,255,255,.19);
+
+  cursor:pointer;
 }
 
 /* =========================
-   APP WINDOW
+   APP ABIERTA
 ========================= */
 
-#window{
-  position:absolute;
+#appWindow{
+  position:fixed;
   inset:0;
 
-  z-index:80;
+  z-index:800;
 
   background:
-    radial-gradient(circle at 70% 0%,#552064,transparent 35%),
-    linear-gradient(160deg,#1b0d26,#08050d);
+    linear-gradient(
+      rgba(0,0,0,.55),
+      rgba(0,0,0,.72)
+    ),
+    url("fondo.jpg") center center / cover no-repeat;
 
   transform:translateY(105%);
 
-  transition:transform .5s cubic-bezier(.77,0,.18,1);
+  transition:
+    transform .48s cubic-bezier(.77,0,.18,1);
 
   padding:
-    max(20px,env(safe-area-inset-top))
-    20px
-    max(20px,env(safe-area-inset-bottom));
+    max(18px,env(safe-area-inset-top))
+    18px
+    max(18px,env(safe-area-inset-bottom));
 }
 
-#window.open{
+#appWindow.open{
   transform:translateY(0);
 }
 
-.app-header{
+.appHeader{
   display:flex;
   align-items:center;
   gap:14px;
 
-  margin-bottom:25px;
+  margin-bottom:24px;
 }
 
 .back{
-  border:0;
+  width:43px;
+  height:43px;
 
-  width:42px;
-  height:42px;
-
+  border:1px solid rgba(255,255,255,.2);
   border-radius:50%;
 
-  background:rgba(255,255,255,.13);
-
   color:white;
+  background:rgba(255,255,255,.15);
 
-  font-size:27px;
+  backdrop-filter:blur(15px);
+
+  font-size:28px;
+
+  cursor:pointer;
 }
 
 #appTitle{
   font-size:25px;
 }
 
-.content-card{
-  background:rgba(255,255,255,.09);
-
-  border:1px solid rgba(255,255,255,.13);
-
-  border-radius:25px;
-
+.card{
   padding:25px;
 
-  backdrop-filter:blur(20px);
+  border-radius:27px;
+
+  background:rgba(20,20,20,.48);
+
+  border:1px solid rgba(255,255,255,.19);
+
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
 }
 
-.content-emoji{
+#appEmoji{
   font-size:65px;
   text-align:center;
 }
@@ -544,76 +598,75 @@ body{
   font-size:15px;
 }
 
-/* =========================
-   SECRET LOGIN
-========================= */
+/* SECRETO */
 
-.password-box{
+.secretBox{
   text-align:center;
 }
 
-.password-box input{
+.secretBox p{
+  opacity:.7;
+  margin-top:8px;
+}
+
+.secretBox input{
   width:100%;
-  padding:15px;
-
   margin-top:20px;
-
-  border:1px solid rgba(255,255,255,.2);
-  outline:none;
+  padding:15px;
 
   border-radius:16px;
 
-  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.22);
+
+  outline:none;
+
+  background:rgba(255,255,255,.12);
 
   color:white;
 
+  font-size:18px;
   text-align:center;
-  font-size:20px;
 }
 
-.password-box button{
+.secretBox button{
   width:100%;
 
   margin-top:12px;
-
   padding:14px;
 
   border:0;
-
   border-radius:16px;
 
   background:white;
   color:#111;
 
-  font-weight:700;
-  font-size:15px;
+  font-weight:750;
 }
 
 #error{
+  color:#ff8da5;
   margin-top:12px;
   font-size:13px;
-  color:#ff7791;
 }
 
-/* =========================
-   TOAST
-========================= */
+/* TOAST */
 
 #toast{
-  position:absolute;
-
-  top:25px;
+  position:fixed;
+  top:max(22px,env(safe-area-inset-top));
   left:50%;
 
-  transform:translate(-50%,-100px);
+  z-index:2000;
 
-  z-index:200;
+  transform:translate(-50%,-130px);
 
   padding:13px 20px;
 
   border-radius:25px;
 
-  background:rgba(20,20,20,.82);
+  background:rgba(10,10,10,.78);
+
+  border:1px solid rgba(255,255,255,.17);
 
   backdrop-filter:blur(20px);
 
@@ -626,21 +679,24 @@ body{
   transform:translate(-50%,0);
 }
 
-/* MOBILE */
-
 @media(max-width:380px){
 
   #clock{
-    font-size:70px;
+    font-size:68px;
   }
 
-  .app-icon{
-    width:58px;
-    height:58px;
+  .appIcon{
+    width:57px;
+    height:57px;
+    border-radius:17px;
   }
 
   .apps{
-    gap:22px 5px;
+    gap:22px 4px;
+  }
+
+  .loveWidget{
+    margin-top:20px;
   }
 }
 
@@ -649,108 +705,124 @@ body{
 
 <body>
 
-<div class="wallpaper"></div>
+<div class="background"></div>
 
-<!-- ARRANQUE -->
+<!-- =========================
+     ARRANQUE
+========================= -->
 
 <div id="boot">
 
-  <div class="boot-heart">❤️</div>
-
-  <div class="boot-name">
-    Ivanna OS
+  <div class="bootHeart">
+    ❤️
   </div>
 
-  <div class="boot-version">
-    Designed with ❤️ by Axel
+  <div class="bootTitle">
+    Mi Ivanna OS
   </div>
 
-  <div class="loading">
-    <div></div>
+  <div class="bootSub">
+    Hecho especialmente para ti
+  </div>
+
+  <div class="loader">
+    <div class="loaderBar"></div>
   </div>
 
 </div>
 
-
-<!-- LOCKSCREEN -->
+<!-- =========================
+     BLOQUEO
+========================= -->
 
 <div id="lockscreen">
 
-  <div class="lock-status">
+  <div class="statusbar">
 
-    <span id="lockMiniTime">
+    <span id="miniTime">
       00:00
     </span>
 
     <span>
-      ●●●  Wi-Fi  🔋
+      ●●● Wi-Fi 🔋
     </span>
 
   </div>
 
-  <div class="lock-icon" id="lockIcon">
-    🔒
+  <div class="lockCenter">
+
+    <div id="lockIcon">
+      🔒
+    </div>
+
+    <div id="date">
+    </div>
+
+    <div id="clock">
+      00:00
+    </div>
+
   </div>
-
-  <div id="date"></div>
-
-  <div id="clock"></div>
-
 
   <div class="notification">
 
-    <div class="notification-top">
+    <div class="notificationTop">
 
-      <div class="notification-icon">
+      <div class="notificationIcon">
         ❤️
       </div>
 
-      <div class="notification-app">
-        Ivanna OS
+      <div class="notificationName">
+        Mi Ivanna
       </div>
 
-      <div class="notification-now">
+      <div class="now">
         ahora
       </div>
 
     </div>
 
-    <div class="notification-title">
-      Tienes una notificación
+    <div class="notificationTitle">
+      Tienes algo nuevo ❤️
     </div>
 
-    <div class="notification-message">
-      Axel tiene algo preparado especialmente para ti...
+    <div class="notificationText">
+      Axel preparó algo especialmente para ti...
     </div>
 
   </div>
 
+  <div
+    class="unlockArea"
+    onclick="unlockPhone()"
+  >
 
-  <div class="unlock" onclick="unlock()">
-
-    <div class="unlock-text">
+    <div class="unlockText">
       Toca para desbloquear ↑
     </div>
 
-    <div class="bar"></div>
+    <div class="homeBar"></div>
 
   </div>
 
 </div>
 
-
-<!-- HOME -->
+<!-- =========================
+     HOME
+========================= -->
 
 <div id="home">
 
-  <div class="home-status">
+  <div class="homeShade"></div>
+
+  <div class="homeStatus">
 
     <span id="homeTime">
       00:00
     </span>
 
-    <span class="os-name">
-      Ivanna OS
+    <span class="osName">
+      Mi Ivanna OS ❤️
     </span>
 
     <span>
@@ -759,143 +831,149 @@ body{
 
   </div>
 
+  <div class="loveWidget">
 
-  <div class="widget">
-
-    <div class="widget-small">
-      PARA TI
+    <div class="widgetLabel">
+      SOLO PARA TI
     </div>
 
     <h1>
-      Hola, Ivanna ❤️
+      Mi Ivanna ❤️
     </h1>
 
     <p>
-      Bienvenida a un pequeño mundo hecho especialmente para ti.
+      Un pequeño lugar donde guardé un pedacito de nosotros.
     </p>
 
   </div>
 
-
   <div class="apps">
 
-    <div class="app"
-         onclick="openApp('Fotos','📸')">
-
-      <div class="app-icon photos">
+    <div
+      class="app"
+      onclick="openApp('Fotos','📸')"
+    >
+      <div class="appIcon photos">
         📸
       </div>
-
-      <span>Fotos</span>
-
+      <div class="appName">
+        Fotos
+      </div>
     </div>
 
-
-    <div class="app"
-         onclick="openApp('Mensajes','💬')">
-
-      <div class="app-icon messages">
+    <div
+      class="app"
+      onclick="openApp('Mensajes','💬')"
+    >
+      <div class="appIcon messages">
         💬
       </div>
-
-      <span>Mensajes</span>
-
+      <div class="appName">
+        Mensajes
+      </div>
     </div>
 
-
-    <div class="app"
-         onclick="openApp('Nosotros','❤️')">
-
-      <div class="app-icon us">
+    <div
+      class="app"
+      onclick="openApp('Nosotros','❤️')"
+    >
+      <div class="appIcon us">
         ❤️
       </div>
-
-      <span>Nosotros</span>
-
+      <div class="appName">
+        Nosotros
+      </div>
     </div>
 
-
-    <div class="app"
-         onclick="openApp('Música','🎵')">
-
-      <div class="app-icon music">
+    <div
+      class="app"
+      onclick="openApp('Música','🎵')"
+    >
+      <div class="appIcon music">
         🎵
       </div>
-
-      <span>Música</span>
-
+      <div class="appName">
+        Música
+      </div>
     </div>
 
-
-    <div class="app"
-         onclick="openApp('Recuerdos','✨')">
-
-      <div class="app-icon memories">
+    <div
+      class="app"
+      onclick="openApp('Recuerdos','✨')"
+    >
+      <div class="appIcon memories">
         ✨
       </div>
-
-      <span>Recuerdos</span>
-
+      <div class="appName">
+        Recuerdos
+      </div>
     </div>
 
-
-    <div class="app"
-         onclick="openApp('Notas','📝')">
-
-      <div class="app-icon notes">
+    <div
+      class="app"
+      onclick="openApp('Notas','📝')"
+    >
+      <div class="appIcon notes">
         📝
       </div>
-
-      <span>Notas</span>
-
+      <div class="appName">
+        Notas
+      </div>
     </div>
 
-
-    <div class="app"
-         onclick="openSecret()">
-
-      <div class="app-icon secret">
+    <div
+      class="app"
+      onclick="openSecret()"
+    >
+      <div class="appIcon secret">
         🔐
       </div>
-
-      <span>Secreto</span>
-
+      <div class="appName">
+        Secreto
+      </div>
     </div>
 
-
-    <div class="app"
-         onclick="openApp('Sistema','⚙️')">
-
-      <div class="app-icon settings">
+    <div
+      class="app"
+      onclick="openApp('Sistema','⚙️')"
+    >
+      <div class="appIcon system">
         ⚙️
       </div>
-
-      <span>Sistema</span>
-
+      <div class="appName">
+        Sistema
+      </div>
     </div>
 
   </div>
 
-
   <div class="dock">
 
-    <div class="dock-app"
-         onclick="showToast('Solo Ivanna puede contestar 📞')">
+    <div
+      class="dockIcon"
+      onclick="toast('Llamando a mi persona favorita... ❤️')"
+    >
       📞
     </div>
 
-    <div class="dock-app"
-         onclick="openApp('Carta','💌')">
+    <div
+      class="dockIcon"
+      onclick="openApp('Carta','💌')"
+    >
       💌
     </div>
 
-    <div class="dock-app"
-         onclick="showToast('Una flor para ti 🌷')">
+    <div
+      class="dockIcon"
+      onclick="toast('Una flor para Mi Ivanna 🌷')"
+    >
       🌷
     </div>
 
-    <div class="dock-app"
-         onclick="openApp('Corazón','❤️')">
+    <div
+      class="dockIcon"
+      onclick="openApp('Mi corazón','❤️')"
+    >
       ❤️
     </div>
 
@@ -903,15 +981,18 @@ body{
 
 </div>
 
+<!-- =========================
+     APPS
+========================= -->
 
-<!-- VENTANA -->
+<div id="appWindow">
 
-<div id="window">
+  <div class="appHeader">
 
-  <div class="app-header">
-
-    <button class="back"
-            onclick="closeApp()">
+    <button
+      class="back"
+      onclick="closeApp()"
+    >
       ‹
     </button>
 
@@ -921,12 +1002,9 @@ body{
 
   </div>
 
+  <div class="card">
 
-  <div class="content-card">
-
-    <div
-      class="content-emoji"
-      id="contentEmoji">
+    <div id="appEmoji">
       ❤️
     </div>
 
@@ -937,11 +1015,9 @@ body{
 
 </div>
 
-
 <div id="toast">
   ❤️
 </div>
-
 
 <script>
 
@@ -953,28 +1029,21 @@ window.addEventListener("load",()=>{
 
   setTimeout(()=>{
 
-    const boot =
-      document.getElementById("boot");
+    document
+      .getElementById("boot")
+      .classList.add("hide");
 
-    boot.style.opacity="0";
-
-    setTimeout(()=>{
-      boot.style.display="none";
-    },800);
-
-  },2400);
+  },2300);
 
 });
 
-
 /* =========================
-   RELOJ
+   HORA
 ========================= */
 
-function updateTime(){
+function updateClock(){
 
-  const now =
-    new Date();
+  const now = new Date();
 
   const time =
     now.toLocaleTimeString(
@@ -986,15 +1055,17 @@ function updateTime(){
       }
     );
 
-  document.getElementById("clock")
+  document
+    .getElementById("clock")
     .textContent=time;
 
-  document.getElementById("homeTime")
+  document
+    .getElementById("miniTime")
     .textContent=time;
 
-  document.getElementById("lockMiniTime")
+  document
+    .getElementById("homeTime")
     .textContent=time;
-
 
   const date =
     now.toLocaleDateString(
@@ -1006,149 +1077,141 @@ function updateTime(){
       }
     );
 
-  document.getElementById("date")
+  document
+    .getElementById("date")
     .textContent=date;
 
 }
 
-updateTime();
+updateClock();
 
-setInterval(updateTime,1000);
-
+setInterval(updateClock,1000);
 
 /* =========================
    DESBLOQUEO
 ========================= */
 
-function unlock(){
+function unlockPhone(){
 
-  const icon =
-    document.getElementById("lockIcon");
+  const lock =
+    document.getElementById("lockscreen");
 
-  icon.textContent="🔓";
+  const home =
+    document.getElementById("home");
 
+  document
+    .getElementById("lockIcon")
+    .textContent="🔓";
 
   if(navigator.vibrate){
-
     navigator.vibrate(35);
-
   }
-
 
   setTimeout(()=>{
 
-    document
-      .getElementById("lockscreen")
-      .classList.add("hide");
+    lock.classList.add("unlocking");
 
-  },300);
+    home.classList.add("visible");
+
+  },250);
 
 }
-
 
 /* =========================
    APPS
 ========================= */
 
+const appMessages={
+
+  "Fotos":`
+    <b>Nuestras fotos 📸</b><br><br>
+    Aquí vamos a guardar nuestros momentos favoritos.
+    Muy pronto esta aplicación tendrá una galería completa.
+  `,
+
+  "Mensajes":`
+    <b>Mensajes para Mi Ivanna 💬</b><br><br>
+    Algunas cosas son demasiado importantes
+    para perderse entre conversaciones.
+    Aquí voy a guardar mensajes especialmente para ti.
+  `,
+
+  "Nosotros":`
+    <b>Axel + Ivanna ❤️</b><br><br>
+    Esta aplicación será nuestro pequeño archivo:
+    momentos, fechas y todas esas cosas que forman nuestra historia.
+  `,
+
+  "Música":`
+    <b>Nuestra música 🎵</b><br><br>
+    Aquí estarán esas canciones que,
+    por alguna razón, siempre terminan recordándome a ti.
+  `,
+
+  "Recuerdos":`
+    <b>Archivo de recuerdos ✨</b><br><br>
+    Hay momentos que pasan una sola vez,
+    pero que uno quisiera guardar para siempre.
+  `,
+
+  "Notas":`
+    <b>Notas 📝</b><br><br>
+    Voy a dejarte pequeños mensajes por aquí.
+    Algunos quizá tengan pistas escondidas...
+  `,
+
+  "Sistema":`
+    <b>Mi Ivanna OS ❤️</b><br><br>
+    Usuario principal: Mi Ivanna<br>
+    Desarrollado por: Axel<br>
+    Estado: funcionando correctamente ❤️<br>
+    Versión: 2.0
+  `,
+
+  "Carta":`
+    <b>Para Mi Ivanna 💌</b><br><br>
+    Hay muchas cosas que quiero escribir aquí.
+    Esta será una de las partes más especiales del sistema.
+  `,
+
+  "Mi corazón":`
+    <b>Información del sistema ❤️</b><br><br>
+    Propietaria: Ivanna.<br>
+    Estado: ocupado.<br>
+    Ocupado por: ella misma.
+  `
+
+};
+
 function openApp(name,emoji){
 
-  const title =
-    document.getElementById("appTitle");
-
-  const content =
-    document.getElementById("appContent");
-
-  const icon =
-    document.getElementById("contentEmoji");
-
-
-  title.textContent=name;
-
-  icon.textContent=emoji;
-
-
-  const messages={
-
-    "Fotos":
-    `
-    <b>Nuestras fotos 📸</b><br><br>
-    Aquí vamos a colocar una galería de nuestros
-    momentos favoritos.
-    `,
-
-    "Mensajes":
-    `
-    <b>Mensajes para ti 💬</b><br><br>
-    Hay cosas que a veces no caben en un solo mensaje.
-    Este será un lugar para guardarlas.
-    `,
-
-    "Nosotros":
-    `
-    <b>Axel + Ivanna ❤️</b><br><br>
-    Dos personas, muchísimos recuerdos y todavía
-    muchas cosas por vivir.
-    `,
-
-    "Música":
-    `
-    <b>Nuestra música 🎵</b><br><br>
-    Aquí estarán las canciones que me recuerdan a ti.
-    `,
-
-    "Recuerdos":
-    `
-    <b>Archivo de recuerdos ✨</b><br><br>
-    Algunos momentos merecen quedarse guardados
-    para siempre.
-    `,
-
-    "Notas":
-    `
-    <b>Notas de Axel 📝</b><br><br>
-    Pequeños mensajes aparecerán aquí.
-    Algunos serán normales...
-    otros quizá tengan pistas.
-    `,
-
-    "Sistema":
-    `
-    <b>Ivanna OS 1.0 ⚙️</b><br><br>
-
-    Usuario: Ivanna ❤️<br>
-    Desarrollador: Axel<br>
-    Estado del sistema: enamorado.<br><br>
-
-    Todos los sistemas funcionando correctamente.
-    `,
-
-    "Carta":
-    `
-    <b>Para Ivanna 💌</b><br><br>
-    Esta carta todavía está siendo escrita...
-    `,
-
-    "Corazón":
-    `
-    <b>Estado ❤️</b><br><br>
-    Propietaria: Ivanna.<br>
-    Acceso de Axel: permanente.
-    `
-
-  };
-
-
-  content.innerHTML =
-    messages[name] ||
-    "Próximamente...";
-
+  document
+    .getElementById("appTitle")
+    .textContent=name;
 
   document
-    .getElementById("window")
+    .getElementById("appEmoji")
+    .textContent=emoji;
+
+  document
+    .getElementById("appContent")
+    .innerHTML=
+      appMessages[name] ||
+      "Próximamente ❤️";
+
+  document
+    .getElementById("appWindow")
     .classList.add("open");
 
 }
 
+function closeApp(){
+
+  document
+    .getElementById("appWindow")
+    .classList.remove("open");
+
+}
 
 /* =========================
    SECRETO
@@ -1156,31 +1219,30 @@ function openApp(name,emoji){
 
 function openSecret(){
 
-  document.getElementById("appTitle")
+  document
+    .getElementById("appTitle")
     .textContent="Secreto";
 
-  document.getElementById("contentEmoji")
+  document
+    .getElementById("appEmoji")
     .textContent="🔐";
 
-
-  document.getElementById("appContent")
+  document
+    .getElementById("appContent")
     .innerHTML=`
 
-      <div class="password-box">
+      <div class="secretBox">
 
-        <b>Área protegida</b>
+        <h3>Área protegida</h3>
 
-        <p style="
-          opacity:.65;
-          margin-top:7px;
-        ">
-          Solo Ivanna debería saber la respuesta.
+        <p>
+          Solo Mi Ivanna debería poder entrar aquí.
         </p>
 
         <input
           id="password"
           type="password"
-          placeholder="Contraseña"
+          placeholder="Escribe la contraseña"
         >
 
         <button onclick="checkPassword()">
@@ -1193,32 +1255,26 @@ function openSecret(){
 
     `;
 
-
   document
-    .getElementById("window")
+    .getElementById("appWindow")
     .classList.add("open");
 
 }
 
-
 function checkPassword(){
 
-  const password =
+  const value =
     document
       .getElementById("password")
       .value
       .toLowerCase()
       .trim();
 
-
-  /* CAMBIA ESTA CONTRASEÑA */
-
-  if(password==="ivanna"){
+  if(value==="ivanna"){
 
     document
-      .getElementById("contentEmoji")
+      .getElementById("appEmoji")
       .textContent="❤️";
-
 
     document
       .getElementById("appContent")
@@ -1228,17 +1284,15 @@ function checkPassword(){
 
           <h2>Acceso concedido ❤️</h2>
 
-          <p style="
-            margin-top:15px;
-            opacity:.8;
-          ">
-            Encontraste el lugar secreto.
+          <p style="margin-top:15px">
+            Sabía que encontrarías la forma de entrar.
           </p>
 
           <p style="
             margin-top:20px;
+            opacity:.75
           ">
-            Aquí pondremos la sorpresa final.
+            Aquí estará tu sorpresa final...
           </p>
 
         </div>
@@ -1252,47 +1306,32 @@ function checkPassword(){
     document
       .getElementById("error")
       .textContent=
-      "Contraseña incorrecta ❤️";
+      "Esa no es la contraseña ❤️";
 
     if(navigator.vibrate){
-      navigator.vibrate([40,40,40]);
+      navigator.vibrate([40,50,40]);
     }
 
   }
 
 }
 
-
 /* =========================
-   CERRAR
+   TOAST
 ========================= */
 
-function closeApp(){
+function toast(message){
 
-  document
-    .getElementById("window")
-    .classList.remove("open");
-
-}
-
-
-/* =========================
-   NOTIFICACIONES
-========================= */
-
-function showToast(text){
-
-  const toast =
+  const element =
     document.getElementById("toast");
 
-  toast.textContent=text;
+  element.textContent=message;
 
-  toast.classList.add("show");
-
+  element.classList.add("show");
 
   setTimeout(()=>{
 
-    toast.classList.remove("show");
+    element.classList.remove("show");
 
   },2200);
 
