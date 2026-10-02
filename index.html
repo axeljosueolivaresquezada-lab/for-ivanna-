@@ -1,175 +1,1304 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For Ivanna ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10071c">
+<title>Ivanna OS</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #000;
-      overflow: hidden;
-    }
+:root{
+  --glass:rgba(255,255,255,.14);
+  --border:rgba(255,255,255,.20);
+  --text:#fff;
+}
 
-    /* PANTALLA DE BLOQUEO */
-    #lockscreen {
-      width: 100vw;
-      height: 100dvh;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: white;
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
 
-      background:
-        linear-gradient(
-          rgba(0,0,0,0.15),
-          rgba(0,0,0,0.35)
-        ),
-        radial-gradient(circle at top, #692d73, #241331 50%, #09060c);
-    }
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background:#050308;
+  color:white;
+}
 
-    .lock {
-      margin-top: 55px;
-      font-size: 25px;
-    }
+/* =========================
+   FONDO
+========================= */
 
-    #date {
-      margin-top: 18px;
-      font-size: 20px;
-      font-weight: 500;
-    }
+.wallpaper{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 75% 15%,#e847bd 0%,transparent 28%),
+    radial-gradient(circle at 15% 35%,#743ee0 0%,transparent 35%),
+    radial-gradient(circle at 70% 80%,#42147e 0%,transparent 35%),
+    linear-gradient(145deg,#160922,#08050f);
+}
 
-    #time {
-      font-size: 82px;
-      font-weight: 200;
-      letter-spacing: -5px;
-      line-height: 1.05;
-    }
+.wallpaper::before{
+  content:"";
+  position:absolute;
+  width:400px;
+  height:400px;
+  background:#ff5ca8;
+  filter:blur(130px);
+  opacity:.17;
+  border-radius:50%;
+  top:-200px;
+  right:-150px;
+  animation:moveGlow 9s ease-in-out infinite alternate;
+}
 
-    .message {
-      margin-top: 35px;
-      padding: 14px 20px;
-      width: 88%;
-      max-width: 390px;
+@keyframes moveGlow{
+  to{
+    transform:translate(-80px,150px);
+  }
+}
 
-      background: rgba(255,255,255,0.14);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
+/* =========================
+   BOOT
+========================= */
 
-      border: 1px solid rgba(255,255,255,0.16);
-      border-radius: 22px;
+#boot{
+  position:absolute;
+  inset:0;
+  z-index:100;
+  background:#030303;
 
-      text-align: center;
-    }
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
 
-    .message-title {
-      font-weight: 600;
-      font-size: 17px;
-    }
+  transition:opacity .8s ease;
+}
 
-    .message-text {
-      margin-top: 5px;
-      opacity: .85;
-      font-size: 14px;
-    }
+.boot-heart{
+  font-size:75px;
+  animation:heartbeat 1.2s infinite;
+}
 
-    .bottom {
-      position: absolute;
-      bottom: 28px;
-      width: 100%;
-      text-align: center;
-    }
+.boot-name{
+  font-size:25px;
+  font-weight:700;
+  margin-top:18px;
+}
 
-    .unlock {
-      color: white;
-      font-size: 16px;
-      opacity: .85;
-      animation: pulse 1.8s infinite;
-    }
+.boot-version{
+  margin-top:7px;
+  font-size:13px;
+  opacity:.45;
+}
 
-    .homebar {
-      width: 135px;
-      height: 5px;
-      background: white;
-      border-radius: 10px;
-      margin: 18px auto 0;
-    }
+.loading{
+  width:160px;
+  height:4px;
+  background:#242424;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:35px;
+}
 
-    @keyframes pulse {
-      0%,100% {
-        opacity: .45;
-        transform: translateY(0);
-      }
+.loading div{
+  width:0%;
+  height:100%;
+  background:white;
+  animation:load 2.2s forwards;
+}
 
-      50% {
-        opacity: 1;
-        transform: translateY(-5px);
-      }
-    }
-  </style>
+@keyframes load{
+  to{width:100%}
+}
+
+@keyframes heartbeat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.13)}
+}
+
+/* =========================
+   LOCK SCREEN
+========================= */
+
+#lockscreen{
+  position:absolute;
+  inset:0;
+  z-index:50;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  transition:
+    transform .8s cubic-bezier(.77,0,.18,1),
+    opacity .7s;
+}
+
+#lockscreen.hide{
+  transform:translateY(-105%);
+  opacity:0;
+  pointer-events:none;
+}
+
+.lock-status{
+  width:100%;
+  padding:
+    max(17px,env(safe-area-inset-top))
+    22px 0;
+
+  display:flex;
+  justify-content:space-between;
+
+  font-size:14px;
+  font-weight:600;
+}
+
+.lock-icon{
+  font-size:24px;
+  margin-top:25px;
+}
+
+#date{
+  margin-top:16px;
+  font-size:18px;
+  font-weight:600;
+  text-transform:capitalize;
+}
+
+#clock{
+  font-size:82px;
+  font-weight:200;
+  letter-spacing:-5px;
+  line-height:1;
+  margin-top:5px;
+}
+
+/* NOTIFICACIÓN */
+
+.notification{
+  width:90%;
+  max-width:410px;
+
+  padding:15px;
+
+  border-radius:22px;
+
+  margin-top:45px;
+
+  background:rgba(255,255,255,.16);
+
+  border:1px solid rgba(255,255,255,.24);
+
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
+
+  box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+.notification-top{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.notification-icon{
+  width:37px;
+  height:37px;
+
+  border-radius:11px;
+
+  background:linear-gradient(145deg,#ff507b,#d41455);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:20px;
+}
+
+.notification-app{
+  font-size:13px;
+  font-weight:700;
+}
+
+.notification-now{
+  margin-left:auto;
+  font-size:12px;
+  opacity:.6;
+}
+
+.notification-title{
+  font-weight:700;
+  margin-top:10px;
+}
+
+.notification-message{
+  font-size:14px;
+  opacity:.8;
+  margin-top:3px;
+}
+
+/* DESBLOQUEO */
+
+.unlock{
+  position:absolute;
+  bottom:max(28px,env(safe-area-inset-bottom));
+
+  text-align:center;
+  width:100%;
+
+  cursor:pointer;
+}
+
+.unlock-text{
+  font-size:15px;
+  animation:up 1.7s infinite;
+}
+
+@keyframes up{
+  50%{
+    transform:translateY(-7px);
+    opacity:.55;
+  }
+}
+
+.bar{
+  width:135px;
+  height:5px;
+  background:white;
+  border-radius:10px;
+  margin:17px auto 0;
+}
+
+/* =========================
+   HOME
+========================= */
+
+#home{
+  position:absolute;
+  inset:0;
+  z-index:10;
+
+  padding:
+    max(15px,env(safe-area-inset-top))
+    18px
+    max(15px,env(safe-area-inset-bottom));
+
+  display:flex;
+  flex-direction:column;
+}
+
+.home-status{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:4px 5px;
+
+  font-size:14px;
+  font-weight:600;
+}
+
+.os-name{
+  opacity:.75;
+}
+
+/* WIDGET */
+
+.widget{
+  margin-top:30px;
+
+  padding:21px;
+
+  border-radius:28px;
+
+  background:var(--glass);
+  border:1px solid var(--border);
+
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+}
+
+.widget-small{
+  font-size:13px;
+  opacity:.65;
+}
+
+.widget h1{
+  margin-top:3px;
+  font-size:27px;
+}
+
+.widget p{
+  font-size:14px;
+  opacity:.7;
+  margin-top:5px;
+}
+
+/* APPS */
+
+.apps{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:25px 10px;
+
+  margin-top:34px;
+}
+
+.app{
+  text-align:center;
+  cursor:pointer;
+  user-select:none;
+}
+
+.app-icon{
+  width:64px;
+  height:64px;
+
+  margin:auto;
+
+  border-radius:19px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:30px;
+
+  background:rgba(255,255,255,.16);
+
+  border:1px solid rgba(255,255,255,.2);
+
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+  transition:.15s;
+}
+
+.app:active .app-icon{
+  transform:scale(.85);
+}
+
+.app span{
+  display:block;
+  font-size:12px;
+  margin-top:7px;
+  text-shadow:0 2px 5px #000;
+}
+
+.photos{
+  background:linear-gradient(145deg,#ffb13b,#ff476f);
+}
+
+.messages{
+  background:linear-gradient(145deg,#3de08f,#0fa956);
+}
+
+.us{
+  background:linear-gradient(145deg,#ff658d,#e01c58);
+}
+
+.music{
+  background:linear-gradient(145deg,#ff496c,#9e174a);
+}
+
+.memories{
+  background:linear-gradient(145deg,#9465ff,#5434d6);
+}
+
+.notes{
+  background:linear-gradient(145deg,#ffd75c,#e99b20);
+}
+
+.secret{
+  background:linear-gradient(145deg,#313131,#050505);
+}
+
+.settings{
+  background:linear-gradient(145deg,#999,#4c4c4c);
+}
+
+/* DOCK */
+
+.dock{
+  margin-top:auto;
+
+  padding:12px;
+
+  display:flex;
+  justify-content:space-around;
+
+  border-radius:28px;
+
+  background:rgba(255,255,255,.14);
+
+  border:1px solid rgba(255,255,255,.18);
+
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
+}
+
+.dock-app{
+  width:57px;
+  height:57px;
+
+  border-radius:17px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:27px;
+
+  background:rgba(255,255,255,.17);
+}
+
+/* =========================
+   APP WINDOW
+========================= */
+
+#window{
+  position:absolute;
+  inset:0;
+
+  z-index:80;
+
+  background:
+    radial-gradient(circle at 70% 0%,#552064,transparent 35%),
+    linear-gradient(160deg,#1b0d26,#08050d);
+
+  transform:translateY(105%);
+
+  transition:transform .5s cubic-bezier(.77,0,.18,1);
+
+  padding:
+    max(20px,env(safe-area-inset-top))
+    20px
+    max(20px,env(safe-area-inset-bottom));
+}
+
+#window.open{
+  transform:translateY(0);
+}
+
+.app-header{
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  margin-bottom:25px;
+}
+
+.back{
+  border:0;
+
+  width:42px;
+  height:42px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.13);
+
+  color:white;
+
+  font-size:27px;
+}
+
+#appTitle{
+  font-size:25px;
+}
+
+.content-card{
+  background:rgba(255,255,255,.09);
+
+  border:1px solid rgba(255,255,255,.13);
+
+  border-radius:25px;
+
+  padding:25px;
+
+  backdrop-filter:blur(20px);
+}
+
+.content-emoji{
+  font-size:65px;
+  text-align:center;
+}
+
+#appContent{
+  margin-top:20px;
+  line-height:1.6;
+  font-size:15px;
+}
+
+/* =========================
+   SECRET LOGIN
+========================= */
+
+.password-box{
+  text-align:center;
+}
+
+.password-box input{
+  width:100%;
+  padding:15px;
+
+  margin-top:20px;
+
+  border:1px solid rgba(255,255,255,.2);
+  outline:none;
+
+  border-radius:16px;
+
+  background:rgba(255,255,255,.1);
+
+  color:white;
+
+  text-align:center;
+  font-size:20px;
+}
+
+.password-box button{
+  width:100%;
+
+  margin-top:12px;
+
+  padding:14px;
+
+  border:0;
+
+  border-radius:16px;
+
+  background:white;
+  color:#111;
+
+  font-weight:700;
+  font-size:15px;
+}
+
+#error{
+  margin-top:12px;
+  font-size:13px;
+  color:#ff7791;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+#toast{
+  position:absolute;
+
+  top:25px;
+  left:50%;
+
+  transform:translate(-50%,-100px);
+
+  z-index:200;
+
+  padding:13px 20px;
+
+  border-radius:25px;
+
+  background:rgba(20,20,20,.82);
+
+  backdrop-filter:blur(20px);
+
+  font-size:14px;
+
+  transition:.4s;
+}
+
+#toast.show{
+  transform:translate(-50%,0);
+}
+
+/* MOBILE */
+
+@media(max-width:380px){
+
+  #clock{
+    font-size:70px;
+  }
+
+  .app-icon{
+    width:58px;
+    height:58px;
+  }
+
+  .apps{
+    gap:22px 5px;
+  }
+}
+
+</style>
 </head>
 
 <body>
 
-  <div id="lockscreen">
+<div class="wallpaper"></div>
 
-    <div class="lock">🔒</div>
+<!-- ARRANQUE -->
 
-    <div id="date">Jueves, 1 de octubre</div>
+<div id="boot">
 
-    <div id="time">20:16</div>
+  <div class="boot-heart">❤️</div>
 
-    <div class="message">
-      <div class="message-title">
-        ❤️ Para Ivanna
+  <div class="boot-name">
+    Ivanna OS
+  </div>
+
+  <div class="boot-version">
+    Designed with ❤️ by Axel
+  </div>
+
+  <div class="loading">
+    <div></div>
+  </div>
+
+</div>
+
+
+<!-- LOCKSCREEN -->
+
+<div id="lockscreen">
+
+  <div class="lock-status">
+
+    <span id="lockMiniTime">
+      00:00
+    </span>
+
+    <span>
+      ●●●  Wi-Fi  🔋
+    </span>
+
+  </div>
+
+  <div class="lock-icon" id="lockIcon">
+    🔒
+  </div>
+
+  <div id="date"></div>
+
+  <div id="clock"></div>
+
+
+  <div class="notification">
+
+    <div class="notification-top">
+
+      <div class="notification-icon">
+        ❤️
       </div>
 
-      <div class="message-text">
-        Tienes algo nuevo esperando por ti...
+      <div class="notification-app">
+        Ivanna OS
       </div>
+
+      <div class="notification-now">
+        ahora
+      </div>
+
     </div>
 
-    <div class="bottom">
-      <div class="unlock">
-        Toca para desbloquear ↑
-      </div>
+    <div class="notification-title">
+      Tienes una notificación
+    </div>
 
-      <div class="homebar"></div>
+    <div class="notification-message">
+      Axel tiene algo preparado especialmente para ti...
     </div>
 
   </div>
 
-  <script>
-    function actualizarHora() {
-      const ahora = new Date();
 
-      document.getElementById("time").textContent =
-        ahora.toLocaleTimeString("es-MX", {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false
-        });
+  <div class="unlock" onclick="unlock()">
 
-      document.getElementById("date").textContent =
-        ahora.toLocaleDateString("es-MX", {
-          weekday: "long",
-          day: "numeric",
-          month: "long"
-        });
+    <div class="unlock-text">
+      Toca para desbloquear ↑
+    </div>
+
+    <div class="bar"></div>
+
+  </div>
+
+</div>
+
+
+<!-- HOME -->
+
+<div id="home">
+
+  <div class="home-status">
+
+    <span id="homeTime">
+      00:00
+    </span>
+
+    <span class="os-name">
+      Ivanna OS
+    </span>
+
+    <span>
+      Wi-Fi 🔋
+    </span>
+
+  </div>
+
+
+  <div class="widget">
+
+    <div class="widget-small">
+      PARA TI
+    </div>
+
+    <h1>
+      Hola, Ivanna ❤️
+    </h1>
+
+    <p>
+      Bienvenida a un pequeño mundo hecho especialmente para ti.
+    </p>
+
+  </div>
+
+
+  <div class="apps">
+
+    <div class="app"
+         onclick="openApp('Fotos','📸')">
+
+      <div class="app-icon photos">
+        📸
+      </div>
+
+      <span>Fotos</span>
+
+    </div>
+
+
+    <div class="app"
+         onclick="openApp('Mensajes','💬')">
+
+      <div class="app-icon messages">
+        💬
+      </div>
+
+      <span>Mensajes</span>
+
+    </div>
+
+
+    <div class="app"
+         onclick="openApp('Nosotros','❤️')">
+
+      <div class="app-icon us">
+        ❤️
+      </div>
+
+      <span>Nosotros</span>
+
+    </div>
+
+
+    <div class="app"
+         onclick="openApp('Música','🎵')">
+
+      <div class="app-icon music">
+        🎵
+      </div>
+
+      <span>Música</span>
+
+    </div>
+
+
+    <div class="app"
+         onclick="openApp('Recuerdos','✨')">
+
+      <div class="app-icon memories">
+        ✨
+      </div>
+
+      <span>Recuerdos</span>
+
+    </div>
+
+
+    <div class="app"
+         onclick="openApp('Notas','📝')">
+
+      <div class="app-icon notes">
+        📝
+      </div>
+
+      <span>Notas</span>
+
+    </div>
+
+
+    <div class="app"
+         onclick="openSecret()">
+
+      <div class="app-icon secret">
+        🔐
+      </div>
+
+      <span>Secreto</span>
+
+    </div>
+
+
+    <div class="app"
+         onclick="openApp('Sistema','⚙️')">
+
+      <div class="app-icon settings">
+        ⚙️
+      </div>
+
+      <span>Sistema</span>
+
+    </div>
+
+  </div>
+
+
+  <div class="dock">
+
+    <div class="dock-app"
+         onclick="showToast('Solo Ivanna puede contestar 📞')">
+      📞
+    </div>
+
+    <div class="dock-app"
+         onclick="openApp('Carta','💌')">
+      💌
+    </div>
+
+    <div class="dock-app"
+         onclick="showToast('Una flor para ti 🌷')">
+      🌷
+    </div>
+
+    <div class="dock-app"
+         onclick="openApp('Corazón','❤️')">
+      ❤️
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- VENTANA -->
+
+<div id="window">
+
+  <div class="app-header">
+
+    <button class="back"
+            onclick="closeApp()">
+      ‹
+    </button>
+
+    <h2 id="appTitle">
+      App
+    </h2>
+
+  </div>
+
+
+  <div class="content-card">
+
+    <div
+      class="content-emoji"
+      id="contentEmoji">
+      ❤️
+    </div>
+
+    <div id="appContent">
+    </div>
+
+  </div>
+
+</div>
+
+
+<div id="toast">
+  ❤️
+</div>
+
+
+<script>
+
+/* =========================
+   ARRANQUE
+========================= */
+
+window.addEventListener("load",()=>{
+
+  setTimeout(()=>{
+
+    const boot =
+      document.getElementById("boot");
+
+    boot.style.opacity="0";
+
+    setTimeout(()=>{
+      boot.style.display="none";
+    },800);
+
+  },2400);
+
+});
+
+
+/* =========================
+   RELOJ
+========================= */
+
+function updateTime(){
+
+  const now =
+    new Date();
+
+  const time =
+    now.toLocaleTimeString(
+      "es-MX",
+      {
+        hour:"2-digit",
+        minute:"2-digit",
+        hour12:false
+      }
+    );
+
+  document.getElementById("clock")
+    .textContent=time;
+
+  document.getElementById("homeTime")
+    .textContent=time;
+
+  document.getElementById("lockMiniTime")
+    .textContent=time;
+
+
+  const date =
+    now.toLocaleDateString(
+      "es-MX",
+      {
+        weekday:"long",
+        day:"numeric",
+        month:"long"
+      }
+    );
+
+  document.getElementById("date")
+    .textContent=date;
+
+}
+
+updateTime();
+
+setInterval(updateTime,1000);
+
+
+/* =========================
+   DESBLOQUEO
+========================= */
+
+function unlock(){
+
+  const icon =
+    document.getElementById("lockIcon");
+
+  icon.textContent="🔓";
+
+
+  if(navigator.vibrate){
+
+    navigator.vibrate(35);
+
+  }
+
+
+  setTimeout(()=>{
+
+    document
+      .getElementById("lockscreen")
+      .classList.add("hide");
+
+  },300);
+
+}
+
+
+/* =========================
+   APPS
+========================= */
+
+function openApp(name,emoji){
+
+  const title =
+    document.getElementById("appTitle");
+
+  const content =
+    document.getElementById("appContent");
+
+  const icon =
+    document.getElementById("contentEmoji");
+
+
+  title.textContent=name;
+
+  icon.textContent=emoji;
+
+
+  const messages={
+
+    "Fotos":
+    `
+    <b>Nuestras fotos 📸</b><br><br>
+    Aquí vamos a colocar una galería de nuestros
+    momentos favoritos.
+    `,
+
+    "Mensajes":
+    `
+    <b>Mensajes para ti 💬</b><br><br>
+    Hay cosas que a veces no caben en un solo mensaje.
+    Este será un lugar para guardarlas.
+    `,
+
+    "Nosotros":
+    `
+    <b>Axel + Ivanna ❤️</b><br><br>
+    Dos personas, muchísimos recuerdos y todavía
+    muchas cosas por vivir.
+    `,
+
+    "Música":
+    `
+    <b>Nuestra música 🎵</b><br><br>
+    Aquí estarán las canciones que me recuerdan a ti.
+    `,
+
+    "Recuerdos":
+    `
+    <b>Archivo de recuerdos ✨</b><br><br>
+    Algunos momentos merecen quedarse guardados
+    para siempre.
+    `,
+
+    "Notas":
+    `
+    <b>Notas de Axel 📝</b><br><br>
+    Pequeños mensajes aparecerán aquí.
+    Algunos serán normales...
+    otros quizá tengan pistas.
+    `,
+
+    "Sistema":
+    `
+    <b>Ivanna OS 1.0 ⚙️</b><br><br>
+
+    Usuario: Ivanna ❤️<br>
+    Desarrollador: Axel<br>
+    Estado del sistema: enamorado.<br><br>
+
+    Todos los sistemas funcionando correctamente.
+    `,
+
+    "Carta":
+    `
+    <b>Para Ivanna 💌</b><br><br>
+    Esta carta todavía está siendo escrita...
+    `,
+
+    "Corazón":
+    `
+    <b>Estado ❤️</b><br><br>
+    Propietaria: Ivanna.<br>
+    Acceso de Axel: permanente.
+    `
+
+  };
+
+
+  content.innerHTML =
+    messages[name] ||
+    "Próximamente...";
+
+
+  document
+    .getElementById("window")
+    .classList.add("open");
+
+}
+
+
+/* =========================
+   SECRETO
+========================= */
+
+function openSecret(){
+
+  document.getElementById("appTitle")
+    .textContent="Secreto";
+
+  document.getElementById("contentEmoji")
+    .textContent="🔐";
+
+
+  document.getElementById("appContent")
+    .innerHTML=`
+
+      <div class="password-box">
+
+        <b>Área protegida</b>
+
+        <p style="
+          opacity:.65;
+          margin-top:7px;
+        ">
+          Solo Ivanna debería saber la respuesta.
+        </p>
+
+        <input
+          id="password"
+          type="password"
+          placeholder="Contraseña"
+        >
+
+        <button onclick="checkPassword()">
+          Desbloquear
+        </button>
+
+        <div id="error"></div>
+
+      </div>
+
+    `;
+
+
+  document
+    .getElementById("window")
+    .classList.add("open");
+
+}
+
+
+function checkPassword(){
+
+  const password =
+    document
+      .getElementById("password")
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  /* CAMBIA ESTA CONTRASEÑA */
+
+  if(password==="ivanna"){
+
+    document
+      .getElementById("contentEmoji")
+      .textContent="❤️";
+
+
+    document
+      .getElementById("appContent")
+      .innerHTML=`
+
+        <div style="text-align:center">
+
+          <h2>Acceso concedido ❤️</h2>
+
+          <p style="
+            margin-top:15px;
+            opacity:.8;
+          ">
+            Encontraste el lugar secreto.
+          </p>
+
+          <p style="
+            margin-top:20px;
+          ">
+            Aquí pondremos la sorpresa final.
+          </p>
+
+        </div>
+
+      `;
+
+  }
+
+  else{
+
+    document
+      .getElementById("error")
+      .textContent=
+      "Contraseña incorrecta ❤️";
+
+    if(navigator.vibrate){
+      navigator.vibrate([40,40,40]);
     }
 
-    actualizarHora();
-    setInterval(actualizarHora, 1000);
-  </script>
+  }
+
+}
+
+
+/* =========================
+   CERRAR
+========================= */
+
+function closeApp(){
+
+  document
+    .getElementById("window")
+    .classList.remove("open");
+
+}
+
+
+/* =========================
+   NOTIFICACIONES
+========================= */
+
+function showToast(text){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent=text;
+
+  toast.classList.add("show");
+
+
+  setTimeout(()=>{
+
+    toast.classList.remove("show");
+
+  },2200);
+
+}
+
+</script>
 
 </body>
 </html>
